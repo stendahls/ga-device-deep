@@ -387,7 +387,7 @@ var gaDeviceDeep = function() {
     var periodArray = period.split('Q');
     var periodYear = periodArray[0] + ''; // stringify
     var periodDate = periodYear + '-12-31';
-    switch(periodArray[1]) {
+    switch(parseInt(periodArray[1])) {
       case 1:
         periodDate = periodYear + '-03-31';
         break;
@@ -413,7 +413,7 @@ var gaDeviceDeep = function() {
    */
   var sessionMarked = function() {
     var cookie = document.cookie;
-    if (cookie.indexOf(cookName + '=1')) {
+    if (cookie.indexOf(cookName + '=1') >= 0) {
       return true;
     }
     return;
@@ -478,7 +478,7 @@ var gaDeviceDeep = function() {
     
     // get the touch events capability of this device
     data.touchEvents = false;
-    if ('touchstart' in document) {
+    if ('ontouchstart' in document || (navigator && navigator.maxTouchPoints)) {
       data.touchEvents = true;
     }
   };
