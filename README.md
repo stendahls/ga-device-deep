@@ -1,6 +1,7 @@
 # ga-device-deep
+## 2017Q2
 More precise device detection for Google analytics.
-**2017Q2** (v0.5) CM - Stendahls AB
+v0.5 CM - Stendahls AB
 
 ----------------------------------------
 
