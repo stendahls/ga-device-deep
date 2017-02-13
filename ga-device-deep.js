@@ -1,6 +1,6 @@
 /*
  * GOOGLE ANALYTICS DEVICE DEEP-DIVE
- * 2017Q2 (v0.5) Craig Morey - Stendahls AB
+ * 2017Q2 (v0.9) Craig Morey - Stendahls AB
  * ----------------------------------------
  * More precise device detection for Google analytics.
  *

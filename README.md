@@ -1,7 +1,6 @@
 # ga-device-deep
-## 2017Q2
 More precise device detection for Google analytics.
-v0.5 CM - Stendahls AB
+Stendahls AB
 
 ----------------------------------------
 
@@ -45,7 +44,7 @@ Using browser features to determine a device type relies on the browsers never u
 
 Androids from Samsung and LG are generally launched in Q2 at MWC, iPhones are launched in Q3 and Q4 is still the largest buying season for tech. Not to mention the browsers' evergreen update schedules. 
 
-This particular script will stop collecting data after the end of the period at the top of this readme (eg, 2017Q2 - the script will stop collecting after the end of 2017 quarter 2, ie June 30th). Set a recurring reminder in your  calendar and either delete or update this script on the run-up to that date.
+This particular script will stop collecting data after the end of the period at the top of the script (eg, 2017Q2 - the script will stop collecting after the end of 2017 quarter 2, ie June 30th). Set a recurring reminder in your  calendar and either delete or update this script on the run-up to that date.
 
 We'll endeavour to keep the script up-to-date when we near the end of a quarter, allowing you to re-doanload or reinstall from npm (eventually).
  
