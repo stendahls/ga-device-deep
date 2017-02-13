@@ -45,7 +45,7 @@
           html += '<b>' + mapDimension[key] + ':</b><br> ' + object[key] + '<br>' ;
         }
       } else {
-        html = 'unknown <div style="font-size:1rem;">may be skipped by the once-per-session cookie. Add "?debug" to the URL to bypass</div>';
+        html = 'unknown device <div style="font-size:1rem;">may be skipped by the once-per-session cookie. <a href="?debug">Add "?debug" to the URL</a> to bypass</div>';
       }
       document.getElementById('output').innerHTML = html;
     </script>
