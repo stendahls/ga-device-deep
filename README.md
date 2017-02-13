@@ -20,7 +20,7 @@ This script will give new custom GA dimensions to your analytics, so you can bet
 
 This scripts differentiates:
 - iPhones: 7+, 7, 6S+, 6S, 6+, 6, 5S/5, 4S/4, 3GS/3G/1
-- iPads: iPad Pro 12.9", iPad Pro 9.7", retina iPads (Air2...iPad3, mini3/2), non-retna iPads (iPad1/2, mini1)
+- iPads: iPad Pro 12.9", iPad Pro 9.7", retina iPads (Air2...iPad3, mini3/2), non-retina iPads (iPad1/2, mini1)
 - Android Phones: Nexus 6P/6, 5X, 4, 2016/2014/2013/2011 type flagship phone (plus 4K screen)
 - Windows 10 Hybrid touch/keyboard devices (Surface, Yoga, etc)
 
@@ -93,11 +93,11 @@ Debug mode will also bypass the cookie that stops it running more than once a se
 
 Debug mode will help diagnose most things, but possible reasons the script is not sending custom dimensions to GA are:
 - The dimensions are not set up in the GA property admin
-- The dimension names (as determined by the GA property) aren't mapped properly to the internat dimensions in the script initialisation.
+- The dimension names (as determined by the GA property) aren't mapped properly to the internal dimensions in the script initialisation.
 - The script has already run once this session, dropped a cookie and is skipping further pageviews.
 - The device you're using has no test against it (eg, most laptops, Android tablets, etc), so it's not passing any of the configured tests, and is returning no data.
 - You're initialising the script either before the GA `create` line, or after the `send` line.
-- Your client doesn't pass teh basic "cut-the-mustard" test (basic test for media.matches compatiibility).
+- Your client doesn't pass the basic "cut-the-mustard" test (basic test for media.matches compatibility).
 - You're offline and the GA script can't be fetched from Google, so the core GA function is not initialised.
 
 ### READING THE RESULTS IN GA:
@@ -109,7 +109,7 @@ We're still investigating the most effective way of using these extra custom dim
 - We haven't bothered with Android tablets as of yet. It's not that we don't care, but the segment is currently so diverse (with no clear leaders), and most of the real dividing factors (screen size, OS version, browser version) are already collected by GA. This may change in the future.
 - Windows 10 devices like the Surface or touch-and-mouse convertibles/laptops are a segment that are not understood enough in front-end.  Traditionally, touch devices are phones and tablets, mouse devices are  laptops and desktops, but these devices are both. That's why these devices  are included here, to give better visibility on the need for testing and  improving user interface techniques.
 - Chromebooks (or Android hybrids) might be covered in the future for the same reasons as Windows 10 hybrids, but as off yet, most markets we see  have no call for this capability. Your audience may differ.
-- Note that when you collect "orientation" (or any optional dimension, but particularly orientation), it's only recorded the first time per session, before the cookie is dropped, so it will only show users that navigated to your site in a particular orientation, not if they change orientation during their session on your site. That behaviour was detemined to be out of scope.
+- Note that when you collect "orientation" (or any optional dimension, but particularly orientation), it's only recorded the first time per session, before the cookie is dropped, so it will only show users that navigated to your site in a particular orientation, not if they change orientation during their session on your site. That behavior was determined to be out of scope.
 - Note also that orientation will be either 0, 90, 180 or -90, and that different devices have different concepts of what is 0˙. An iPad, small Android tablet or phone will consider portrait-up as 0˙, but large 16:9 Android tablets will consider landscape-up as 0˙.
 - dppx is to one decimal point. eg a Nexus 5X has a dppx of 2.63, but it's shortened to 2.6, for simplicity.
 
