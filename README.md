@@ -1,6 +1,7 @@
 # ga-device-deep
 More precise device detection for Google analytics.
-2017Q2 (v0.5) CM - Stendahls AB
+**2017Q2** (v0.5) CM - Stendahls AB
+
 ----------------------------------------
  
 ### WHAT IT IS:
@@ -19,7 +20,7 @@ It's not npm-and-forget. For one, you'll need to set-up custom property dimensio
 
 This does not give a full picture of all your device analytics. If you need to know what sizes of Android tablet visit, or what version of iOS is common on iPhones, that information is readily available using existing GA dimensions and metrics. It only tries to add new dimensions to help analysis.
  
-Most importantly, this is a short term indicator. It has built-in obsolescence, as both the devices in the market and the features in browsers that help to identify them are constantly changing. And that's even on-topof the normal caveats of using a JS triggered analytics system like GA.
+Most importantly, this is a short term indicator. It has built-in obsolescence, as both the devices in the market and the features in browsers that help to identify them are constantly changing. And that's even on-top of the normal caveats of using a JS triggered analytics system like GA.
  
 ### BUILT-IN OBSOLESCENCE:
  
@@ -27,7 +28,7 @@ Don't be mistaken, this is not magical extra functionality for GA, this is a hac
 
 Using browser features to determine a device type relies on the browsers never updating their features and no new devices coming out that mess with our assumptions. That's why this script only runs for a yearly  quarter. 
 
-Androids from Samsung and LG are generally launch in Q1 at MWC, iPhones are launched in Q3 and the Q4 is still the largest buying season for tech. Not to mention the browsers' evergreen update schedules. 
+Androids from Samsung and LG are generally launched in Q1 at MWC, iPhones are launched in Q3 and the Q4 is still the largest buying season for tech. Not to mention the browsers' evergreen update schedules. 
 
 This particular script will stop collecting data after the end of the period at the top of this into (eg, 2017Q2 - the script will stop collecting after the end of 2017 quarter 2, ie June 30th). Set a recurring reminder in your  calendar and either delete or update this script on the run-up to that date.
  
@@ -35,7 +36,7 @@ This particular script will stop collecting data after the end of the period at 
 
 First, you'll need to understand a bit about GA custom dimensions/metrics:
 https://developers.google.com/analytics/devguides/collection/analyticsjs/custom-dims-mets
-...then you'll need to set up the custom property dimensions you want in your GA property admin. 
+...then you'll need to set up the custom property dimensions you want in your GA property admin. We'd recommend setting it up under the "session" scope.
  
 Now we're ready, include the script anywhere before the GA pageview (or event hit if you only want the dimension against events, not pageviews). Yes, I know that makes it a blocking script if you trigger a pageview in the HEAD - sorry about that, no way around it. Next, *inbetween* the 'create' event and the page/event 'send' event and add this code:
  
@@ -45,12 +46,43 @@ ga('set', gaCustomDims);
 ```
 NB note that "dimension1" should be replaced by the id that the GA admin interface gives you when add a new custom dimension for your property. If you haven't added any other custom dimensions, it will probably be "dimension1"
  
-...you can choose to add more custom dimensions that this script collects, eg, for the full set, replace the code above with:
+...you can choose to add more custom dimensions that this script collects, eg, for the full set of possible dimensions, replace the code above with:
  
  ```
-var gaCustomDims = gaDeviceDeep.find({'device':'dimension1','orientation':'dimension2','dppx':'dimension3','forceTouch':'dimension4','wideGamut':'dimension5','pointerEvents':'dimension6','touchEvents':'dimension7'});
+var gaCustomDims = gaDeviceDeep.find(
+  {
+    'device':'dimension1',
+    'orientation':'dimension2',
+    'dppx':'dimension3',
+    'forceTouch':'dimension4',
+    'wideGamut':'dimension5',
+    'pointerEvents':'dimension6',
+    'touchEvents':'dimension7'
+  }
+);
  ga('set', gaCustomDims);
 ```
+
+NB The script runs once every session (session defined by a cookie session), then it drops a cookie to prevent the script running for repeat page views. In theory, it could keep posting dimensions, and GA's 'session' scope would deal with it, but as a piece of runtime code running on the main thread, it seems pointless to take up any more CPU time (or XHR calls) than is necessary.
+
+### DEBUGGING:
+
+There is a *debug* mode, just add `debug` to the url, eg `http://mydomain.com?debug` or `http://mydomain.com?id=1234567890&debug`. This will show up in the console and list:
+- the period this script is valid for (ie, when it will become obsolete).
+- the data collected from this client.
+- the input map object of dimensions (as above).
+- the output object of custom dimensions and their values.
+
+Debug mode will also bypass the cookie that stops it running more than once a session, so it will run on every page refresh.
+
+Debug mode will help diagnose most things, but possible reasons the script is not sending custom dimensions to GA are:
+- The dimensions are not set up in the GA property admin
+- The dimension names (as determined by the GA property) aren't mapped properly to the internat dimensions in the script initialisation.
+- The script has already run once this session, dropped a cookie and is skipping further pageviews.
+- The device you're using has no test against it (eg, most laptops, Android tablets, etc), so it's not passing any of the configured tests, and is returning no data.
+- You're initialising the script either before the GA `create` line, or after the `send` line.
+- Your client doesn't pass teh basic "cut-the-mustard" test (basic test for media.matches compatiibility).
+- You're offline and the GA script can't be fetched from Google, so the core GA function is not initialised.
 
 ### NOTES:
  
