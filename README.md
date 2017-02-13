@@ -12,7 +12,7 @@ Point a device at http://stendahls.github.io/ga-device-deep/ to see the script d
  
 GA gives a semi-complete picture of the devices that visit your site. 
 
-For instance, Your site could have a massively different experience if your users visit with a 2016 Samsung S7 Edge, or Trump's favorite, a Samsung S3 from 2012. But GA will only tell you they are Android phones with the exact same viewport size. Some ISPs will give more hints to GA about the identity of the device, but some (especially in asia/africa) won't, and the individual GA product IDs don't help band together devices much either (is a Samsung GT-9500 high-end? A I9300/I9320 low? What about the I9305N variant?). 
+For instance, Your site could have a massively different experience if your users visit with a 2016 Samsung S7 Edge, or Trump's favorite, a Samsung S3 from 2012. But GA will only tell you they are Android phones with the exact same screen size (in CSS px). Some ISPs will give more hints to GA about the identity of the device, but some (especially in asia/africa) won't, and the individual GA product IDs don't help band together devices much either (is a Samsung GT-9500 high-end? A I9300/I9320 low? What about the I9305N variant?). 
 
 iPads are similar, an iPad2 is a non-retina device with a bad processor and worse memory, but it will appear to GA to be the same as a desktop-class, wide-gamut-retina iPad Pro 9.7".
  
@@ -20,9 +20,11 @@ This script will give new custom GA dimensions to your analytics, so you can bet
 
 This scripts differentiates:
 - iPhones: 7+, 7, 6S+, 6S, 6+, 6, 5S/5, 4S/4, 3GS/3G/1
-- iPads: iPad Pro 12.9", iPad Pro 9.7", retina iPads (Air2 - iPad3, mini4/3), non-retna iPads (iPad1/2)
+- iPads: iPad Pro 12.9", iPad Pro 9.7", retina iPads (Air2...iPad3, mini3/2), non-retna iPads (iPad1/2, mini1)
 - Android Phones: Nexus 6P/6, 5X, 4, 2016/2014/2013/2011 type flagship phone (plus 4K screen)
 - Windows 10 Hybrid touch/keyboard devices (Surface, Yoga, etc)
+
+Check the script for the full list of supported tests - it's an easily readable config at the top of the file.
 
 ### WHAT IT IS NOT:
 
@@ -38,15 +40,13 @@ Devices this script does not differentiate:
  
 ### BUILT-IN OBSOLESCENCE:
  
-Don't be mistaken, this is not magical extra functionality for GA, this is a hack. 
+Don't be mistaken, this is not magical extra functionality for GA, this is a browser feature hack. 
 
-Using browser features to determine a device type relies on the browsers never updating their features and no new devices coming out that mess with our assumptions. That's why this script only runs for a yearly quarter. Running any longer would just mean the data becoming progressively more unreliable.
-
-Androids from Samsung and LG are generally launched in Q2 at MWC, iPhones are launched in Q3 and Q4 is still the largest buying season for tech. Not to mention the browsers' evergreen update schedules. 
+Using browser features to determine a device type relies on the browsers never updating their features and no new devices coming out that mess with our assumptions. Androids from Samsung and LG are generally launched in Q2 at MWC, iPhones are launched in Q3 and Q4 is still the largest buying season for tech. Not to mention the browsers' evergreen update schedules. That's why this script only runs for a yearly quarter. Running any longer without adjustment would just mean the data becoming progressively more unreliable.
 
 This particular script will stop collecting data after the end of the period at the top of the script (eg, 2017Q2 - the script will stop collecting after the end of 2017 quarter 2, ie June 30th). Set a recurring reminder in your  calendar and either delete or update this script on the run-up to that date.
 
-We'll endeavour to keep the script up-to-date when we near the end of a quarter, allowing you to re-doanload or reinstall from npm (eventually).
+We'll endeavour to keep the script up-to-date when we near the end of a quarter, allowing you to re-download or reinstall from npm (eventually).
  
 ### USAGE:
 
@@ -54,13 +54,13 @@ First, you'll need to understand a bit about GA custom dimensions/metrics:
 https://developers.google.com/analytics/devguides/collection/analyticsjs/custom-dims-mets
 ...then you'll need to set up the custom property dimensions you want in your GA property admin. We'd recommend setting it up under the "session" scope.
  
-Now we're ready, include the script anywhere before the GA pageview (or event hit if you only want the dimension against events, not pageviews). Yes, I know that makes it a blocking script if you trigger a pageview in the HEAD - sorry about that, no way around it. Next, *inbetween* the `create` event and the page/event `send` event and add this code:
+Now we're ready, include the script anywhere before the normal GA script. Yes, I know that makes it a blocking script if you trigger GA in the HEAD - sorry about that, no way around it. Next, *inbetween* the `create` event and the page/event `send` event, add this code:
  
 ```
 var gaCustomDims = gaDeviceDeep.find({'device':'dimension1'});
 ga('set', gaCustomDims);
 ```
-NB note that "dimension1" should be replaced by the id that the GA admin interface gives you when add a new custom dimension for your property. If you haven't added any other custom dimensions, it will probably be "dimension1" anyway.
+NB note that "dimension1" should be replaced by the id that the GA admin interface gives you when add a new custom dimension to your property. If you haven't added any other custom dimensions, it will probably be "dimension1" anyway.
  
 ...you can choose to add more custom dimensions that this script collects, eg, for the full set of possible dimensions, replace the code above with:
  
@@ -99,6 +99,10 @@ Debug mode will help diagnose most things, but possible reasons the script is no
 - You're initialising the script either before the GA `create` line, or after the `send` line.
 - Your client doesn't pass teh basic "cut-the-mustard" test (basic test for media.matches compatiibility).
 - You're offline and the GA script can't be fetched from Google, so the core GA function is not initialised.
+
+### READING THE RESULTS IN GA:
+
+We're still investigating the most effective way of using these extra custom dimensions, but the first way is to use them as secondary dimensions in almost any GA report (eg, audience:mobile:overview, and add "device" as a secondary dimension).
 
 ### NOTES:
  
