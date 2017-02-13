@@ -7,7 +7,7 @@ v0.5 CM - Stendahls AB
 
 ### EXAMPLE:
 
-Point a device at http://stendahls.github.io/ga-device-deep/ to see the script detect the device and report the dimensions it would then use in Google analytics. For repeat viewings, add `?debug` to the URL, or the cookie will skip the detection.
+Point a device at http://stendahls.github.io/ga-device-deep/ to see the script detect the device and report the dimensions it would could then be sent to Google analytics. For repeat viewings, add `?debug` to the URL, or the cookie will skip the detection.
 
 ### WHAT IT IS:
  
@@ -19,6 +19,12 @@ iPads are similar, an iPad2 is a non-retina device with a bad processor and wors
  
 This script will give new custom GA dimensions to your analytics, so you can better determine the mix of new and old devices amongst your audience. It  sniffs out feature differences between devices and outputs them in a way that they can be integrated with your GA scripts.
 
+This scripts differentiates:
+- iPhones: 7+, 7, 6S+, 6S, 6+, 6, 5S/5, 4S/4, 3GS/3G/1
+- iPads: iPad Pro 12.9", iPad Pro 9.7", retina iPads (Air2 - iPad3, mini4/3), non-retna iPads (iPad1/2)
+- Android Phones: Nexus 6P/6, 5X, 4, 2016/2014/2013/2011 type flagship phone (plus 4K screen)
+- Windows 10 Hybrid touch/keyboard devices (Surface, Yoga, etc)
+
 ### WHAT IT IS NOT:
 
 It's not npm-and-forget. For one, you'll need to set-up custom property dimensions in your GA property before you can start reporting them.
@@ -26,16 +32,22 @@ It's not npm-and-forget. For one, you'll need to set-up custom property dimensio
 This does not give a full picture of all your device analytics. If you need to know what sizes of Android tablet visit, or what version of iOS is common on iPhones, that information is readily available using existing GA dimensions and metrics. It only tries to add new dimensions to help analysis.
  
 Most importantly, this is a short term indicator. It has built-in obsolescence, as both the devices in the market and the features in browsers that help to identify them are constantly changing. And that's even on-top of the normal caveats of using a JS triggered analytics system like GA.
+
+Devices this script does not differentiate:
+- Android tablets
+- Laptops & desktops
  
 ### BUILT-IN OBSOLESCENCE:
  
 Don't be mistaken, this is not magical extra functionality for GA, this is a hack. 
 
-Using browser features to determine a device type relies on the browsers never updating their features and no new devices coming out that mess with our assumptions. That's why this script only runs for a yearly  quarter. 
+Using browser features to determine a device type relies on the browsers never updating their features and no new devices coming out that mess with our assumptions. That's why this script only runs for a yearly quarter. Running any longer would just mean the data becoming progressively more unreliable.
 
-Androids from Samsung and LG are generally launched in Q1 at MWC, iPhones are launched in Q3 and Q4 is still the largest buying season for tech. Not to mention the browsers' evergreen update schedules. 
+Androids from Samsung and LG are generally launched in Q2 at MWC, iPhones are launched in Q3 and Q4 is still the largest buying season for tech. Not to mention the browsers' evergreen update schedules. 
 
-This particular script will stop collecting data after the end of the period at the top of this into (eg, 2017Q2 - the script will stop collecting after the end of 2017 quarter 2, ie June 30th). Set a recurring reminder in your  calendar and either delete or update this script on the run-up to that date.
+This particular script will stop collecting data after the end of the period at the top of this readme (eg, 2017Q2 - the script will stop collecting after the end of 2017 quarter 2, ie June 30th). Set a recurring reminder in your  calendar and either delete or update this script on the run-up to that date.
+
+We'll endeavour to keep the script up-to-date when we near the end of a quarter, allowing you to re-doanload or reinstall from npm (eventually).
  
 ### USAGE:
 
