@@ -3,11 +3,13 @@
   <head>
     <meta name="viewport" content="initial-scale=1, width=device-width">
     <title>Stendahls GA device deep custom dimensions</title>
+    <style>
+      body {
+        font-family: sans-serif; font-size: 40px; font-size: 10vw;
+      }
+    </style>
   </head>
   <body>
-    <style>body {
-      font-family: sans-serif; font-size: 40px; font-size: 10vw;
-    }</style>
     
     <div style="font-size:1rem;margin: 20px 0;">
     
@@ -15,20 +17,37 @@
       
       <p>More precise device detection for Google analytics</p>
       
+      <a href="https://github.com/stendahls/ga-device-deep">View on gitHub</a>
+      
       <hr>
+      
+      <div id="output" style="font-size: 40px; font-size: 10vw;"></div>
     
     </div>
 
     <script src="ga-device-deep.js" lang="javascript"></script>
     <script>
-      var object = gaDeviceDeep.find({"device":"dimension1","orientation":"dimension2"});
+      var dimensionMap = {'device':'dimension1','orientation':'dimension2','dppx':'dimension3','forceTouch':'dimension4','wideGamut':'dimension5','pointerEvents':'dimension6','touchEvents':'dimension7'};
+      var object = gaDeviceDeep.find(dimensionMap);
+      
+      // from here on is only for this demo:
+      function swap(json){
+        var ret = {};
+        for(var key in json){
+          ret[json[key]] = key;
+        }
+        return ret;
+      }
+      var mapDimension = swap(dimensionMap);
+      var html = '';
       if (object) {
         for (var key in object) {
-          document.write( '<b>' + key + ':</b><br> ' + object[key] + '<br>' );
+          html += '<b>' + mapDimension[key] + ':</b><br> ' + object[key] + '<br>' ;
         }
       } else {
-        document.write('unknown/skipped');
+        html = 'unknown <div style="font-size:1rem;">may be skipped by the once-per-session cookie. Add "?debug" to the URL to bypass</div>';
       }
+      document.getElementById('output').innerHTML = html;
     </script>
   </body>
 </html>
