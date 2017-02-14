@@ -5,13 +5,13 @@
     <title>Stendahls GA device deep custom dimensions</title>
     <style>
       body {
-        font-family: sans-serif; font-size: 40px; font-size: 10vw;
+        font-family: sans-serif;
       }
     </style>
   </head>
   <body>
     
-    <div style="font-size:1rem;margin: 20px 0;">
+    <div style="margin: 20px 0;">
     
       <h3>GA device deep script example.</h3>
       
@@ -21,7 +21,11 @@
       
       <hr>
       
-      <div id="output" style="font-size: 40px; font-size: 10vw;"></div>
+      <div id="output" style="font-size: 36px; font-size: 8vw;"></div>
+      
+      <hr>
+      
+      <p id="ua"></p>
     
     </div>
 
@@ -48,6 +52,7 @@
         html = 'unknown device <div style="font-size:1rem;">may be skipped by the once-per-session cookie. <a href="?debug">Add "?debug" to the URL</a> to bypass</div>';
       }
       document.getElementById('output').innerHTML = html;
+      document.getElementById('ua').innerHTML = window.navigator.userAgent;
     </script>
   </body>
 </html>
