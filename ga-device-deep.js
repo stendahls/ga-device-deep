@@ -376,13 +376,13 @@ var gaDeviceDeep = function() {
     
     // get the pointerevents capability of this device
     data.pointerEvents = false;
-    if ('pointerover' in document) {
+    if ('PointerEvent' in window || (window.navigator && 'msPointerEnabled' in window.navigator)) {
       data.pointerEvents = true;
     }
     
     // get the touch events capability of this device
     data.touchEvents = false;
-    if ('ontouchstart' in document || (navigator && navigator.maxTouchPoints)) {
+    if ('ontouchstart' in document || (window.navigator && window.navigator.maxTouchPoints)) {
       data.touchEvents = true;
     }
   };
