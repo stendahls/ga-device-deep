@@ -112,6 +112,7 @@ We're still investigating the most effective way of using these extra custom dim
 - Note that when you collect "orientation" (or any optional dimension, but particularly orientation), it's only recorded the first time per session, before the cookie is dropped, so it will only show users that navigated to your site in a particular orientation, not if they change orientation during their session on your site. That behavior was determined to be out of scope.
 - Note also that orientation will be either 0, 90, 180 or -90, and that different devices have different concepts of what is 0˙. An iPad, small Android tablet or phone will consider portrait-up as 0˙, but large 16:9 Android tablets will consider landscape-up as 0˙.
 - dppx is to one decimal point. eg a Nexus 5X has a dppx of 2.63, but it's shortened to 2.6, for simplicity.
+- A note about performance. This script may have to be a "blocking" script depending on your GA set-up, but it is pretty performant. It carries out no forced layout calculations (screen width/height and orientation are not the same as viewport measurements), and in Chrome devtools, simulating a 5x slowdown CPU (low-end device) on a 2014 Macbook Pro, it takes 7ms to evaluate the JS, plus 13ms to process on a measurement run, and 4ms on subsequent runs (Unthrottled, a measurement run takes 6ms to evaluate and process, 2ms on subsequent runs). This is pretty easily within a non-janky 16ms frame depending on the speed of your device.
 
 ### TO DO:
 - test, test, test.
