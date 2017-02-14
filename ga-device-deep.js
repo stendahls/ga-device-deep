@@ -380,7 +380,7 @@ var gaDeviceDeep = function() {
       data.pointerEvents = true;
     }
     
-    // get the touch events capability of this device
+    // get the touch events capability of this device - all the usual caveats apply to touchEvent detection.
     data.touchEvents = false;
     if ('ontouchstart' in document || (window.navigator && window.navigator.maxTouchPoints)) {
       data.touchEvents = true;
