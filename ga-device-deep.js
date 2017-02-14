@@ -167,7 +167,7 @@ var gaDeviceDeep = function() {
           'dppx': 3
         },
         {
-          'name': 'Android phone 2013', /* 720P/480P: ex: Samsung S3/J5/J7/A3 */
+          'name': 'Android phone 2012', /* 720P/480P: ex: Samsung S3/J5/J7/A3 */
           'UA': 'Android',
           'screen': 360
         },
