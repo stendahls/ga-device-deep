@@ -229,12 +229,6 @@ var gaDeviceDeep = function() {
     }
     return false;
    };
-   
- /*
-  * check if we're running debug. Just add "?debug" to the url of the page to run the script every page view (skipping cookies), and reporting to console
-  */
-  var inDebugMessage = function (msg,type) {
-  };
     
   /*
    * run the whole kit and kaboodle.
