@@ -28,7 +28,7 @@ var gaDeviceDeep = function() {
   var inputDimsObj = {
     'device': 'dimension1'
   };                              // object: custom GA dimensions have ids like "dimension1", "dimension2", etc, so we need to map our internal dimension ids to the ones assigned by the proprty admin in GA. This object map is passed in at script initiation, and if it isn't, it defaults to the values you see here (which would be true if you haven't previously assigned any custom GA dimensions). If you want to collect more custom dimensions such as orientation, you can add that to the map object on initialisation. ie, if you wanted to assign all possible dimensions and map them to GA ids, you'd need to assign 7 custom dimensions in the GA property admin, then call gaDeviceDeep.find({'device':'dimension1','orientation':'dimension2','dppx':'dimension3','forceTouch':'dimension4','wideGamut':'dimension5','pointerEvents':'dimension6','touchEvents':'dimension7'});
-  var outputDimsObj = {};         // object: THE OUTPUT. object with the custom dimensions that needs to be recorded alow with the pageview, eg, {'dimension1':iPhone7,'dimension2':'0'}
+  var outputDimsObj = false;         // object: THE OUTPUT. object with the custom dimensions that needs to be recorded alow with the pageview, eg, {'dimension1':iPhone7,'dimension2':'0'}
   var tests = [
     {
       'name' : 'iPhone',
@@ -336,6 +336,12 @@ var gaDeviceDeep = function() {
     // screen width and height
     data.screenW = Math.max(screen.width || 0);
     data.screenH = Math.max(screen.height || 0);
+    
+    // edge case for older Android Browsers that report screen width/height in actual pixels, not CSS px
+    if (data.ua.indexOf('Android') > -1 && data.ua.indexOf('Chrome') === -1 && data.screenW >= 480 && data.screenH >= 480) {
+      data.screenW = data.screenW/2;
+      data.screenH = data.screenW/2;
+    }
     
     // get window orientation
     if (typeof screen.orientation !== 'undefined') {
