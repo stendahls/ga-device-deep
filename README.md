@@ -12,7 +12,7 @@ Point a device at http://stendahls.github.io/ga-device-deep/ to see the script d
  
 GA gives a semi-complete picture of the devices that visit your site. 
 
-For instance, Your site could have a massively different experience if your users visit with a 2016 Samsung S7 Edge, or Trump's favorite, a Samsung S3 from 2012. But GA will only tell you they are Android phones with the exact same screen size (in CSS px). Some ISPs will give more hints to GA about the identity of the device, but some (especially in asia/africa) won't, and the individual GA product IDs don't help band together devices much either (is a Samsung GT-9500 high-end? A I9300/I9320 low? What about the I9305N variant?). 
+For instance, Your site could have a massively different experience if your users visit with a 2016 Samsung S7 Edge, or Trump's favorite, a Samsung S3 from 2012. But GA will only tell you they are Android phones with the exact same screen size (in CSS px). Some user-agents will give more hints to GA about the identity of the device, but some ISPs (especially in asia/africa) actually strip them out, and the individual GA product IDs don't help band together devices much either (is a Samsung GT-9500 high-end? A I9300/I9320 low? What about the I9305N variant?). 
 
 iPads are similar, an iPad2 is a non-retina device with a bad processor and worse memory, but it will appear to GA to be the same as a desktop-class, wide-gamut-retina iPad Pro 9.7".
  
