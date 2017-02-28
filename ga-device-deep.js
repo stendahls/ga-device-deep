@@ -1,6 +1,6 @@
 /*
  * GOOGLE ANALYTICS DEVICE DEEP-DIVE
- * 2017Q2 (v0.9) Craig Morey - Stendahls AB
+ * 2017Q2 (v0.9.1) Craig Morey - Stendahls AB
  * ----------------------------------------
  * More precise device detection for Google analytics.
  *
@@ -149,7 +149,7 @@ var gaDeviceDeep = function() {
          * a 2014 class flagship.
          */
         {
-          'name': 'Android phone 4K', /* 2160P: **THIS IS A TEMPORARY CATEGORY AS ONLY ONE PHONE IS WIDELY AVAILABLE AT THIS RES** ex: Xperia Z5/Z7 prem */
+          'name': 'Android phone 4K', /* 2160P: **THIS IS A TEMPORARY CATEGORY AS ONLY ONE PHONE IS WIDELY AVAILABLE AT THIS RES** ex: Xperia Z5/Z7/ZX prem */
           'UA': 'Android',
           'screen': 360,
           'dppx': 6
