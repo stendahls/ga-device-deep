@@ -358,7 +358,7 @@ var gaDeviceDeep = function() {
     
     // get the forcetouch capability of this device
     data.forceTouch = false;
-    if ('webkitmouseforcedown' in document) {
+    if ('ontouchforcechange' in window) {
       data.forceTouch = true;
     }
     
